@@ -10,7 +10,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~13.2.0",
     "@angular/common": "~13.2.0",
     "@angular/compiler": "~13.2.0",
     "@angular/core": "~13.2.0",
@@ -22,6 +21,8 @@
     "@ngrx/router-store": "^13.0.2",
     "@ngrx/store": "^13.0.2",
     "@ngrx/store-devtools": "^13.0.2",
+    "latest": "^0.2.0",
+    "primeicons": "^5.0.0",
     "primeng": "^13.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
@@ -39,6 +40,6 @@
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.5.2"
+    "typescript": "^4.5.5"
   }
 }

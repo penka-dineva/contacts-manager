@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, filter, tap } from 'rxjs';
 import { ContactsService } from 'src/services/contacts.service';
 import * as ContactActions from '../actions/contact.actions';
 import { Contact } from 'src/models/contact';
@@ -24,8 +24,8 @@ export class ContactsEffects {
     getContactDetails$ = createEffect(() => this.actions$
     .pipe(
       ofType(ContactActions.getContactDetails.init),
-      map(x => x.payload),
-      switchMap((request) =>  this.contactsService.getContactDetails(request)
+      map(x => x.payload as string),
+      switchMap((contactId) => this.contactsService.getContactDetails(contactId)
       .pipe(
         map((resp: any) => ContactActions.getContactDetails.success(resp)),
         catchError((err: any) => of(ContactActions.getContactDetails.failed(err)))))))
@@ -44,7 +44,9 @@ export class ContactsEffects {
     .pipe(
       ofType(ContactActions.updateContact.init),
       map(x => x.payload),
-      switchMap((param) => this.contactsService.updateContact(param!.id , param!.content)
+      tap(c => console.log(c, 15155)),
+      filter(val => val!.id?.length > 0),
+      switchMap((payload) => this.contactsService.updateContact(payload!.id , payload!.content)
       .pipe(
         map((resp: any) => ContactActions.updateContact.success(resp)),
         catchError((err: any) => of(ContactActions.updateContact.failed(err)))))))

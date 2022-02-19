@@ -5,11 +5,10 @@ import { select, Store } from '@ngrx/store';
 import * as ContactsActions from '../store/actions/contact.actions';
 import {
   getContacts,
-  getContactDetails,
-  createContact,
-  updateContact,
   removeContact
  } from 'src/store/selectors/contacts.selectors';
+ import { map } from 'rxjs';
+import { ContactsService } from 'src/services/contacts.service';
 
 @Component({
   selector: 'app-root',
@@ -18,31 +17,28 @@ import {
 })
 
 export class AppComponent implements OnInit{
-  private testContact: Contact = {
-    name: 'Mat Jane',
-    phone: '0884891111',
-    email: 'test@test.com',
-    iban: 'BGRZ35YYY888GGG'
-  }
-  title = 'contacts-manager';
-  public contacts$ = this.store.pipe(select(getContacts));
-  public contactDetails$ = this.store.pipe(select(getContactDetails));
-  public createContact$ = this.store.pipe(select(createContact));
-  public updateContact$ = this.store.pipe(select(updateContact));
-  public removeContact$ = this.store.pipe(select(removeContact));
+  public contacts$ = this.store.pipe(
+    select(getContacts),
+    map(contacts => contacts.value as Contact[])
+    );
 
-  constructor(private http: HttpClient, private store: Store) {}
-
-
-  getContacts = () => this.store.dispatch(ContactsActions.getContacts.init());
-  getContactDetails = (contactId: string) => this.store.dispatch(ContactsActions.getContactDetails.init(contactId));
-  createContact = (payload: Contact) => this.store.dispatch(ContactsActions.createContact.init(payload));
-  updateContact = () => this.store.dispatch(ContactsActions.updateContact.init());
-  removeContact = () => this.store.dispatch(ContactsActions.removeContact.init());
+  constructor(private http: HttpClient, private store: Store, private contactsService: ContactsService) {}
 
   ngOnInit(){
-  this.createContact(this.testContact)
-  this.getContacts()   
+   this.store.dispatch(ContactsActions.getContacts.init());
+  }
+
+  addContact() {
+    this.contactsService.addContact()
+  }
+
+  editContact(contact: Contact) {
+    this.contactsService.editContact(contact)
+  }
+
+  deleteContact(id: string) {
+    this.contactsService.removeConact(id);
+    this.store.pipe(select(removeContact)).subscribe();
   }
 }
 
