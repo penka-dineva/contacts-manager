@@ -7,7 +7,7 @@ import {
   getContacts,
   removeContact
  } from 'src/store/selectors/contacts.selectors';
- import { catchError, map, Observable, of } from 'rxjs';
+ import { catchError, map, Observable, of, filter } from 'rxjs';
 import { ContactsService } from 'src/services/contacts.service';
 import { ToastService } from 'src/services/toast.service';
 
@@ -21,6 +21,8 @@ export class AppComponent implements OnInit{
   public contactsLoading$: Observable<boolean> = new Observable();
   public contacts$ = this.store.pipe(
     select(getContacts),
+    filter(val => !!val.value),
+    filter(val => Array.isArray(val.value)),
     map(contacts => {
       this.contactsLoading$ = of(contacts.isLoading);
       return contacts.value as Contact[]

@@ -67,7 +67,7 @@ public contactForm!: FormGroup;
   }
 
   updateContact() {
-    if (this.contactForm.valid) {
+    if (this.contactForm.valid && this.contactForm.touched) {
       this.contactsService.handleUpdateContact(this.getContact());
       this.ref.close();
       return
