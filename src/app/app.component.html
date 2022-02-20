@@ -1,20 +1,35 @@
-<h1>Contacts Manager</h1> <p-button label="Add Contact" icon="pi pi-check" (onClick)="addContact()"></p-button>
-<ng-container *ngIf="contacts$ | async; let contacts">
-  <div *ngFor="let contact of contacts">
-    <p-card>
-      <ng-template pTemplate="header">
-          {{contact.name}}
-      </ng-template>
-      <div class="card-row" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-        <span>phone:</span> <span>{{contact.phone}}</span>
-      </div>
-      <div class="card-row" style="display: flex; flex-direction: row; width: 100%; align-items: center;">
-        <span>email:</span> <span>{{contact.email}}</span>
-      </div>
-      <ng-template pTemplate="footer">
-        <p-button label="Edit" icon="pi pi-check" (onClick)="editContact(contact)"></p-button>
-        <p-button label="Delete" icon="pi pi-times" (onClick)="deleteContact(contact!._id!)"styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
-      </ng-template>
-  </p-card>
+<div class="contacts-wrapper">
+  <div class="card-row first">
+    <h1>Contacts Manager</h1>
+    <p-button label="Add Contact" icon="pi pi-check" (onClick)="addContact()"></p-button>
   </div>
-</ng-container>
+  <p-scrollPanel [style]="{height: '700px'}" styleClass="custom">
+    <ng-container *ngIf="contacts$ | async; let contacts">
+      <div *ngFor="let contact of contacts">
+        <p-card>
+          <ng-template pTemplate="header">
+              {{contact.firstName}} {{contact.lastName}}
+          </ng-template>
+          <div class="card-row">
+            <label class="label">phone:</label> <span>{{contact.phone}}</span>
+          </div>
+          <div class="card-row">
+            <label class="label">IBAN:</label> <span>{{contact.iban}}</span>
+          </div>
+          <div class="card-row">
+            <label class="label">address:</label> <span>{{contact.address}}</span>
+          </div>
+          <div class="card-row">
+            <label class="label">DOB:</label><span>{{contact.dob | date }}</span>
+          </div>
+          <ng-template pTemplate="footer">
+            <p-button label="Edit" icon="pi pi-check" (onClick)="editContact(contact)"></p-button>
+            <p-button label="Delete" icon="pi pi-times" (onClick)="deleteContact(contact!._id!)"styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
+          </ng-template>
+      </p-card>
+      </div>
+    </ng-container>
+  </p-scrollPanel>
+</div>
+<p-toast position="top-center"></p-toast>
+<p-progressSpinner *ngIf="contactsLoading$ | async"></p-progressSpinner>

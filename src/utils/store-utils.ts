@@ -33,7 +33,7 @@ export function serverCallStart(state: any, action: ActionWithPayload, propertyN
   return {
     ...state,
     [propertyName]: {
-      isLoading: false,
+      isLoading: true,
       value: null
     } as ServerItemBase
   }

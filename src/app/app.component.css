@@ -1,0 +1,58 @@
+:host {
+  background-color: beige;
+}
+.contacts-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 15px;
+  align-items: center;
+  margin: 0 auto;
+  border: 2px solid silver;
+  border-radius: 8px;
+}
+
+p-scrollPanel {
+  width: 100% !important;
+}
+.p-scrollpanel p {
+  padding: .5rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.custom {
+  width: 100%;
+}
+.p-scrollpanel.custom  .p-scrollpanel-wrapper {
+  border-right: 9px solid var(--layer-1);
+  border-bottom: 9px solid var(--layer-1);
+}
+ 
+.p-scrollpanel.custom .p-scrollpanel-bar {
+      background-color: var(--layer-2);
+      border-radius: 0;
+      opacity: 1;
+      transition: background-color .2s;
+  }
+
+.card-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.card-row.first {
+  justify-content: space-between;
+}
+.p-card.p-component {
+  width: 450px;
+  margin: 0 auto;
+}
+
+.label {
+  width: 80px;
+  text-transform: capitalize;
+  margin-right: 15px;
+}
+

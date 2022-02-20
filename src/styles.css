@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+.p-dialog.p-dynamic-dialog.p-component {
+  width: 450px;
+  height: 600px;
+}

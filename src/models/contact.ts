@@ -1,8 +1,10 @@
 export interface Contact {
   id?: string,
   _id?: string,
-  name: string,
+  firstName: string,
+  lastName: string,
   phone?: string,
-  email?: string;
-  iban?: string
+  address?: string;
+  iban?: string,
+  dob: string
 }

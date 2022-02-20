@@ -1,13 +1,37 @@
-// TODO add other controls; add validation;
 <div class="edit-contact-wrapper">
-  <ng-container [formGroup]="contact">
-    <div class="form-group">
-      <label>Name</label>
-      <input class="form-control" type="text" formControlName="name" required>
+  <ng-container [formGroup]="contactForm" novalidate>
+    <div class="form-group form-row">
+      <label class="form-label">First Name*</label>
+      <input class="form-control" type="text" formControlName="firstName" required>
     </div>
-    <div class="form-group">
-      <label>Phone</label>
+    <div class="form-group form-row">
+      <label class="form-label">Last Name*</label>
+      <input class="form-control" type="text" formControlName="lastName" required>
+    </div>
+    <div class="form-group form-row">
+      <label class="form-label">Phone</label>
       <input class="form-control" type="text" formControlName="phone">
+    </div>
+    <div class="form-group form-row">
+      <label class="form-label">Address</label>
+      <input class="form-control" type="text" formControlName="address">
+    </div>
+    <div class="form-group form-row">
+      <label class="form-label">IBAN</label>
+      <input class="form-control" type="text" formControlName="iban">
+    </div>
+    <div class="form-group form-row">
+      <label class="form-label">Date of Birth</label>
+      <p-calendar
+      id="dob"
+      formControlName="dob"
+      [showIcon]="true"
+      hourFormat="24"
+      dateFormat="dd-mm-yy"
+      placeholder="Set Date of Birth"
+      [class]="'dob'"
+      >
+      </p-calendar>
     </div>
   </ng-container>
 </div>

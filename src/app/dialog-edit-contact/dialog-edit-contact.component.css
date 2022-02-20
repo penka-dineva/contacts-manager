@@ -1,0 +1,26 @@
+.dob {
+  width: 150px;
+  font-size: 14px;
+  height: 200px;
+}
+.p-calendar .datepicker.p-component {
+  width: 150px !important;
+  font-size: 14px !important;
+}
+
+.form-control.ng-invalid.ng-touched {
+  border-color: crimson;
+}
+
+.form-row {
+  padding: 15px;
+}
+.form-label{
+  width: 100%;
+  display: flex;
+}
+
+input {
+  width: 100%;
+  display: flex;
+}

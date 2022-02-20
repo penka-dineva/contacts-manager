@@ -7,8 +7,9 @@ import {
   getContacts,
   removeContact
  } from 'src/store/selectors/contacts.selectors';
- import { map } from 'rxjs';
+ import { catchError, map, Observable, of } from 'rxjs';
 import { ContactsService } from 'src/services/contacts.service';
+import { ToastService } from 'src/services/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -17,19 +18,28 @@ import { ContactsService } from 'src/services/contacts.service';
 })
 
 export class AppComponent implements OnInit{
+  public contactsLoading$: Observable<boolean> = new Observable();
   public contacts$ = this.store.pipe(
     select(getContacts),
-    map(contacts => contacts.value as Contact[])
+    map(contacts => {
+      this.contactsLoading$ = of(contacts.isLoading);
+      return contacts.value as Contact[]
+    })
     );
-
-  constructor(private http: HttpClient, private store: Store, private contactsService: ContactsService) {}
+  
+  constructor(
+    private http: HttpClient,
+    private store: Store,
+    private contactsService: ContactsService,
+    private toastService: ToastService
+    ) {}
 
   ngOnInit(){
    this.store.dispatch(ContactsActions.getContacts.init());
   }
 
   addContact() {
-    this.contactsService.addContact()
+    this.contactsService.addContact();
   }
 
   editContact(contact: Contact) {
@@ -37,8 +47,26 @@ export class AppComponent implements OnInit{
   }
 
   deleteContact(id: string) {
-    this.contactsService.removeConact(id);
-    this.store.pipe(select(removeContact)).subscribe();
+    this.contactsLoading$ = of(true);
+    this.contactsService.removeConact(id)
+    .pipe(
+      (msg)=>  msg,
+      catchError(err => {
+        this.toastService.addErrorMessage('something went wrong');
+        return of(err)
+      })
+    )
+    .subscribe((msg)=>{
+      this.contactsLoading$ = of(false);
+      this.store.dispatch(ContactsActions.getContacts.init());
+          if(msg!.msg) {
+            this.toastService.addSuccessMessage('contact successfully deleted')
+          } 
+    });
+  }
+
+  ngOnDsetroy() {
+    this.toastService.clearMessage();
   }
 }
 

@@ -2,16 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Contact = new Schema({
-  name: {
+  firstName: {
+    type: String
+  },
+  lastName: {
     type: String
   },
   phone: {
     type: String
   },
-  email: {
+  address: {
     type: String
   },
   iban: {
+    type: String
+  },
+  dob:  {
     type: String
   }
 }, {

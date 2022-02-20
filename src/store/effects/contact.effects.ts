@@ -11,14 +11,10 @@ export class ContactsEffects {
   getContacts$ = createEffect(() => this.actions$
   .pipe(
     ofType(ContactActions.getContacts.init),
-   
     switchMap(() => this.contactsService.getContacts()
     .pipe(
-      map((resp: Contact[]) => {
-       // const mapped =  Object.entries(resp).map((el) => el[1])
-       
-        return ContactActions.getContacts.success(resp)
-      }),
+      map((resp: Contact[]) =>  ContactActions.getContacts.success(resp)
+      ),
       catchError((err: any) => of(ContactActions.getContacts.failed(err)))))))
 
     getContactDetails$ = createEffect(() => this.actions$
@@ -44,7 +40,6 @@ export class ContactsEffects {
     .pipe(
       ofType(ContactActions.updateContact.init),
       map(x => x.payload),
-      tap(c => console.log(c, 15155)),
       filter(val => val!.id?.length > 0),
       switchMap((payload) => this.contactsService.updateContact(payload!.id , payload!.content)
       .pipe(
