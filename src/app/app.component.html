@@ -1,7 +1,7 @@
 <div class="contacts-wrapper">
   <div class="card-row first">
     <h1>Contacts Manager</h1>
-    <p-button label="Add Contact" icon="pi pi-check" (onClick)="addContact()"></p-button>
+    <p-button id="create-btn" label="Add Contact" icon="pi pi-check" (onClick)="addContact()"></p-button>
   </div>
   <p-scrollPanel [style]="{height: '700px'}" styleClass="custom">
     <ng-container *ngIf="contacts$ | async; let contacts">

@@ -2,28 +2,28 @@
   <ng-container [formGroup]="contactForm" novalidate>
     <div class="form-group form-row">
       <label class="form-label">First Name*</label>
-      <input class="form-control" type="text" formControlName="firstName" required>
+      <input id="fc-first-name" class="form-control" type="text" formControlName="firstName" required>
     </div>
     <div class="form-group form-row">
       <label class="form-label">Last Name*</label>
-      <input class="form-control" type="text" formControlName="lastName" required>
+      <input id="fc-last-name" class="form-control" type="text" formControlName="lastName" required>
     </div>
     <div class="form-group form-row">
       <label class="form-label">Phone</label>
-      <input class="form-control" type="text" formControlName="phone">
+      <input id="fc-phone" class="form-control" type="text" formControlName="phone">
     </div>
     <div class="form-group form-row">
       <label class="form-label">Address</label>
-      <input class="form-control" type="text" formControlName="address">
+      <input id="fc-address" class="form-control" type="text" formControlName="address">
     </div>
     <div class="form-group form-row">
       <label class="form-label">IBAN</label>
-      <input class="form-control" type="text" formControlName="iban">
+      <input id="fc-iban" class="form-control" type="text" formControlName="iban">
     </div>
     <div class="form-group form-row">
       <label class="form-label">Date of Birth</label>
       <p-calendar
-      id="dob"
+      id="fc-dob"
       formControlName="dob"
       [showIcon]="true"
       hourFormat="24"
@@ -35,6 +35,6 @@
     </div>
   </ng-container>
 </div>
-<p-button label="Update" icon="pi pi-check" (onClick)="updateContact()"></p-button>
+<p-button id="update-btn" label="Update" icon="pi pi-check" (onClick)="updateContact()"></p-button>
 <p-button label="Cancel" icon="pi pi-times" (onClick)="cancelUpdate()" styleClass="p-button-secondary" [style]="{'margin-left': '.5em'}"></p-button>
 
