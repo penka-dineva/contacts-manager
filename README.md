@@ -6,7 +6,16 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Backend server
+
+To start the node and express server, you must have MongoDB installed on your local development system.
 Run nodemon to connect to database.
+Once the MongoDB community edition has been set up, then run the below command to evoke the database:
+
+`brew services start mongodb-community`
+
+Next, execute the command while staying in the server folder (node-backend):
+`nodemon`
 
 ## Code scaffolding
 
